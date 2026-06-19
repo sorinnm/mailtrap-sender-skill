@@ -1,0 +1,11 @@
+{
+  "from": { "email": "hello@yourdomain.com", "name": "Your Name" },
+  "subject": "{{first_name}}, welcome aboard!",
+  "text": "Hi {{first_name}},\n\nThanks for joining {{company}}. We're glad to have you.\n\n— The Team",
+  "html": "<p>Hi {{first_name}},</p><p>Thanks for joining <strong>{{company}}</strong>. We're glad to have you.</p><p>— The Team</p>",
+  "category": "personalized-campaign",
+  "recipients": [
+    { "email": "alice@example.com", "first_name": "Alice", "company": "Acme" },
+    { "email": "bob@example.com", "first_name": "Bob", "company": "Globex" }
+  ]
+}
