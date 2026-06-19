@@ -51,5 +51,6 @@ Or invoke directly: `/mailtrap-send` (skill) or the `mailtrap-mailer` subagent.
 ```
 
 `email` is required per recipient; every other key is a merge variable. `from`
-falls back to `MAILTRAP_FROM_*` env vars. Secrets and your real
-`recipients.json` are gitignored.
+falls back to `MAILTRAP_FROM_*` env vars. `category` (or the `MAILTRAP_CATEGORY`
+env var) is sent as the `X-MT-Category` header to tag the mail's category in
+Mailtrap. Secrets and your real `recipients.json` are gitignored.

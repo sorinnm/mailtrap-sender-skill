@@ -21,6 +21,7 @@ Read these from the environment (set in `.env` — load it first if present):
 | `MAILTRAP_INBOX_ID` | when `sandbox` | Sandbox inbox id |
 | `MAILTRAP_FROM_EMAIL` | no | Default sender if JSON omits `from.email` |
 | `MAILTRAP_FROM_NAME` | no | Default sender name |
+| `MAILTRAP_CATEGORY` | no | Default category → sent as the `X-MT-Category` header when JSON omits `category` |
 
 Load the file if it exists, then read values:
 
@@ -56,8 +57,14 @@ Shape:
 }
 ```
 
-`from` falls back to `MAILTRAP_FROM_EMAIL` / `MAILTRAP_FROM_NAME`. `category` is
-optional. Each recipient must have `email`; any other keys are merge variables.
+`from` falls back to `MAILTRAP_FROM_EMAIL` / `MAILTRAP_FROM_NAME`. Each recipient
+must have `email`; any other keys are merge variables.
+
+`category` is optional and is emitted as the **`X-MT-Category`** custom header (in
+the payload's `headers` object) so the mail is tagged to that category in
+Mailtrap. It falls back to the `MAILTRAP_CATEGORY` env var if the data file omits
+it. (Mailtrap also accepts a top-level `category` field; this skill uses the
+header form as requested.)
 
 ## 3. Build + send one payload per recipient
 
@@ -76,7 +83,7 @@ For each recipient:
      "subject": "Alice, welcome aboard!",
      "text": "Hi Alice,\n\nThanks for joining Acme.\n\n— The Team",
      "html": "<p>Hi Alice,</p><p>Thanks for joining <strong>Acme</strong>.</p>",
-     "category": "personalized-campaign"
+     "headers": { "X-MT-Category": "personalized-campaign" }
    }
    ```
 
