@@ -1,4 +1,4 @@
-# mailtrap-api-sender
+#  mailtrap-api-sender
 
 Send personalized email through [Mailtrap](https://mailtrap.io) — sandbox
 (testing) or live delivery — driven entirely by `curl`. No build step, no
