@@ -99,11 +99,25 @@ For each recipient:
    A `2xx` with `{"success":true,...}` is a send. On non-2xx, show the body and
    continue to the next recipient (don't abort the whole batch).
 
-## 4. Report
+## 4. Save sent log
+
+After all sends complete, write a CSV log file named `sent_log_<YYYY-MM-DD>.csv`
+in the **current working directory** (i.e. the directory you are in when running
+the skill, not a temp folder). Use the Write tool to create it.
+
+Columns: `nr`, `company`, `contact_name`, `email`, `subject`, `status`
+
+- `status` is `sent` for 2xx responses, `failed` for anything else.
+- If a file with the same name already exists, append a suffix `_2`, `_3`, etc.
+  rather than overwriting it.
+
+Example path: `./sent_log_2026-06-24.csv`
+
+## 5. Report
 
 Summarize: total recipients, succeeded, failed (with the API error for each),
-and the mode/endpoint used. In `sandbox`, remind the user the mail landed in the
-Mailtrap test inbox, not real inboxes.
+the mode/endpoint used, and the path of the log file saved. In `sandbox`, remind
+the user the mail landed in the Mailtrap test inbox, not real inboxes.
 
 ## Safety rules
 
